@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Google Озвучка Текста</title>
+</head>
+<body>
+    <textarea id="inputText" rows="4" cols="50"></textarea><br/>
+    <button onclick="speak()">Озвучить</button>
+    
+    <script>
+        function speak() {
+            // Получаем введенный текст
+            const text = document.getElementById('inputText').value.trim();
+            
+            if (!text) return alert("Пожалуйста, введите текст для озвучивания.");
+
+            // Создаем объект синтеза речи
+            const synth = window.speechSynthesis;
+
+            // Проверяем поддержку браузера
+            if (!synth) {
+                alert("Ваш браузер не поддерживает синтез речи.");
+                return;
+            }
+
+            // Создаем голосовой элемент
+            const utterance = new SpeechSynthesisUtterance(text);
+
+            // Устанавливаем язык (например, русский)
+            utterance.lang = 'ru-RU';
+
+            // Устанавливаем скорость воспроизведения (0.1 - 10)
+            utterance.rate = 1;
+
+            // Добавляем голосовой элемент в очередь
+            synth.speak(utterance);
+        }
+    </script>
+</body>
+</html>
